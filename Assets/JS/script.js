@@ -102,6 +102,11 @@ function printWeather(city) {
 
 // This writes the city list from storage to the page as clickable buttons that return the results for their cities
 function writeCityList() {
+    // debugger;
+    cityList = JSON.parse(localStorage.getItem("cityList"))
+    if (cityList === null) {
+        cityList = [];
+    }
     if (cityList !== null) {
         $("#citylist").empty();
         while (cityList.length > 8) {
@@ -109,15 +114,16 @@ function writeCityList() {
             cityList.pop();
             localStorage.setItem("cityList", JSON.stringify(cityList))
         }
-        cityList = JSON.parse(localStorage.getItem("cityList"))
-        for (var i=0; i < cityList.length; i++) {
-            var citySearchBtn = $('<button>').attr({
-                class: "btn btn-secondary col-12 my-2 histBtn",
-                type: "city",
-                id: "histBtn",
-                city: cityList[i]
-            }).text(cityList[i])
-            $('#citylist').append(citySearchBtn)
+        if (cityList !== null) {
+            for (var i=0; i < cityList.length; i++) {
+                var citySearchBtn = $('<button>').attr({
+                    class: "btn btn-secondary col-12 my-2 histBtn",
+                    type: "city",
+                    id: "histBtn",
+                    city: cityList[i]
+                }).text(cityList[i])
+                $('#citylist').append(citySearchBtn)
+            }
         }
         //this event listener makes the previously searched value buttons clickable and runs the sequence 
         $(".histBtn").on("click", function() {
@@ -126,7 +132,6 @@ function writeCityList() {
             var city = $(this).attr("city")
             printWeather(city);
         })
-
     }
 }
 
@@ -134,18 +139,23 @@ function writeCityList() {
 $("#cityBtn").on("click", function() {
     $("#fiveDay").html("");
     printWeather($("#citySearch").val());
+    console.log(cityList);
     //This variable and if function make sure that there aren't any duplicates in the button list or in the array of previously searched cities.
-    var cityValue = cityList.indexOf($('#citySearch').val())
-    if (cityValue == -1) {
-        cityList.unshift($("#citySearch").val())
+    if (cityList !== null) {
+        var cityValue = cityList.indexOf($('#citySearch').val())
+        if (cityValue == -1) {
+            cityList.unshift($("#citySearch").val())
+            localStorage.setItem("cityList", JSON.stringify(cityList))
+            console.log('this log is in the array validated unshift and write')
+        }
     }
-    localStorage.setItem("cityList", JSON.stringify(cityList))
     writeCityList();
 })
 
-// The init funciton writes the locally stored city buttons to the page on load
+
 function init() {
     writeCityList()
+    localStorage.setItem("butt","hole");
 }
 
 init();
