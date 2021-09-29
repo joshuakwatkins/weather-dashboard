@@ -1,13 +1,15 @@
+var cityList = [];
 var fiveDay = $("#fiveDay");
 var apiKey = "0c4100a3c3b494478634c7e4efeb7808";
 // var city = "atlanta";
-var today = moment()
+// var today = moment()
 
 function printWeather(city) {
     var latLonURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=imperial";
     fetch(latLonURL).then(function(response){
         if(response.status !== 200) {
             alert("Please enter a valid city");
+            return;
         }
         return response.json()
     }).then(function(data){
@@ -19,6 +21,8 @@ function printWeather(city) {
         }).then(function(data){
             console.log(data);
                //THIS IS WHERE THE MAGIC HAPPENS WITH THE DATA
+
+            //    this builds the current weather card
                var weatherTodayHeader = $("#weatherTodayTitle");
                var weatherTodayTemp = $("#weatherTodayTemp");
                var weatherTodayWind = $("#weatherTodayWind");
@@ -28,11 +32,11 @@ function printWeather(city) {
 
                weatherTodayHeader.text("Weather for " + city + " " + moment().format("(MM/DD/YY)"));
                weatherTodayTemp.text(data.current.temp);
-               weatherTodayWind.text(data.current.wind_speed);
+               weatherTodayWind.text(data.current.wind_speed + " MPH");
                weatherTodayHumidiy.text(data.current.humidity);
                weatherTodayUV.text(data.current.uvi);
               weatherTodayIcon.attr("src","http://openweathermap.org/img/wn/" + data.current.weather[0].icon + "@2x.png")
-              
+            //   this forloop builds the 5 day forcast
               for (var i=0; i<5; i++) {
                   console.log("this is the start of my for loop")
 
@@ -63,7 +67,7 @@ function printWeather(city) {
                   var forecastWind = $('<p>').attr({
                       class: "card-text text-white",
                       id: "forecastWind"
-                  }).text("Wind: " + data.daily[i].wind_speed)
+                  }).text("Wind: " + data.daily[i].wind_speed + " MPH")
 
                   var forecastHumidity = $('<p>').attr({
                       class: "card-text text-white",
@@ -85,7 +89,43 @@ function printWeather(city) {
 
 // printWeather()
 
+
+function writeCityList() {
+    if (cityList !== null) {
+        $("#citylist").empty();
+        while (cityList.length > 8) {
+            cityList = json.parse(localStorage.getItem("cityList"))
+            cityList.pop();
+            localStorage.setItem("cityList", JSON.stringify(cityList))
+        }
+        localStorage.setItem("cityList",JSON.stringify(cityList));
+        for (var i=0; i < cityList.length; i++) {
+            var citySearchBtn = $('<button>').attr({
+                class: "btn btn-secondary col-12 my-2 histBtn",
+                type: "city",
+                city: cityList[i]
+            }).text(cityList[i])
+            $('#citylist').append(citySearchBtn)
+        }
+    }
+}
+
 $("#cityBtn").on("click", function() {
     $("#fiveDay").html("");
     printWeather($("#citySearch").val());
+    cityList.unshift($("#citySearch").val())
+    localStorage.setItem("cityList", JSON.stringify(cityList))
+    writeCityList();
 })
+
+$(".histBtn").on("click", ".histBtn", function() {
+    $('#fiveday').html("");
+    var city = $(this).attr("city")
+    console.log(city)
+})
+
+function init() {
+    writeCityList()
+}
+
+init();
