@@ -1,6 +1,6 @@
 var fiveDay = $("#fiveDay");
 var apiKey = "0c4100a3c3b494478634c7e4efeb7808";
-var city = "atlanta";
+// var city = "atlanta";
 var today = moment()
 
 function printWeather(city) {
@@ -42,7 +42,7 @@ function printWeather(city) {
                   });
 
                   var forecastDate = $('<div>').attr({
-                      class: "card-header",
+                      class: "card-header text-white",
                       id: "#forecastDate"
                   }).text(moment().add((i + 1),'days').format("MM/DD/YY"));
 
@@ -56,17 +56,17 @@ function printWeather(city) {
                   }) 
 
                   var forecastTemp = $('<p>').attr({
-                      class: "card-text",
+                      class: "card-text text-white",
                       id: "forecastTemp"
                   }).text("Temp: " + data.daily[i].temp.day);
 
                   var forecastWind = $('<p>').attr({
-                      class: "card-text",
+                      class: "card-text text-white",
                       id: "forecastWind"
                   }).text("Wind: " + data.daily[i].wind_speed)
 
                   var forecastHumidity = $('<p>').attr({
-                      class: "card-text",
+                      class: "card-text text-white",
                       id: "forecastHumidity"
                   }).text("Humidity: " + data.daily[i].humidity)
 
@@ -83,4 +83,9 @@ function printWeather(city) {
         })
     }
 
-printWeather()
+// printWeather()
+
+$("#cityBtn").on("click", function() {
+    $("#fiveDay").html("");
+    printWeather($("#citySearch").val());
+})
