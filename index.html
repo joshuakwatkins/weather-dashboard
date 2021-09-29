@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./Assets/CSS/style.css">
+    </head>
+    <body>
+        <div class="jumbotron text-center bg-dark bg-gradient text-primary p-3">
+            <h1>THE WEATHER</h1>
+            <h2>WHERE YOU AT DAWG</h2>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-3">
+                    <h2>SEARCH FOR A CITY:</h2>
+                    <input type="city" class="form-control" id="citySearch">
+                    <button type="submit" class="btn btn-primary col-12 my-2">Search</button>
+                    <hr>
+                    <button type="city" city="Austin" class="btn btn-secondary col-12 my-2">Austin</button>
+                    <button type="city" city="Seattle" class="btn btn-secondary col-12 my-2">Seattle</button>
+                    <button type="city" city="Washington D.C." class="btn btn-secondary col-12 my-2">Washington DC</button>
+                </div>
+                <div class="col-9">
+                    <div class="row">
+                        <div id="weatherToday" class="border border-2 m-3">
+                            <h2 id="weatherTodayTitle">Atlanta [ICON]</h2>
+                            <p>Temp: <span id="weatherTodayTemp"></span></p>
+                            <p>Wind: <span id="weatherTodayWind"></span></p>
+                            <p>Humidity: <span id="weatherTodayHumidity"></span></p>
+                            <p>UV Index: <span id="weatherTodayUV"></span></p>
+                        </div>
+                    </div>
+                    <h4 class="p-3">5 Day Forecast</h4>
+                    <div id="fiveDay" class="row justify-content-between p-3">
+                        <div class="card text-white bg-secondary m-2 p-1 col-2" style="max-width: 14rem;">
+                            <div class="card-header" id="forcastDate">3/31/2021</div>
+                            <div class="card-body">
+                            <h5 class="card-title" id="forecastIcon">Icon goes here</h5>
+                            <p class="card-text" id="forcastTemp">Temp: 900</p>
+                            <p class="card-text" id="forcastWind">Temp: 9 MPH</p>
+                            <p class="card-text" id="forcastHumidity">Humidity: 90%</p>
+                            </div>
+                        </div> 
+                        <div class="card text-white bg-secondary m-2 p-1 col-2" style="max-width: 14rem;">
+                            <div class="card-header" id="forcastDate">3/31/2021</div>
+                            <div class="card-body">
+                            <h5 class="card-title" id="forecastIcon">Icon goes here</h5>
+                            <p class="card-text" id="forcastTemp">Temp: 900</p>
+                            <p class="card-text" id="forcastWind">Temp: 9 MPH</p>
+                            <p class="card-text" id="forcastHumidity">Humidity: 90%</p>
+                            </div>
+                        </div> 
+                        <div class="card text-white bg-secondary m-2 p-1 col-2" style="max-width: 14rem;">
+                            <div class="card-header" id="forcastDate">3/31/2021</div>
+                            <div class="card-body">
+                            <h5 class="card-title" id="forecastIcon">Icon goes here</h5>
+                            <p class="card-text" id="forcastTemp">Temp: 900</p>
+                            <p class="card-text" id="forcastWind">Temp: 9 MPH</p>
+                            <p class="card-text" id="forcastHumidity">Humidity: 90%</p>
+                            </div>
+                        </div> 
+                        <div class="card text-white bg-secondary m-2 p-1 col-2" style="max-width: 14rem;">
+                            <div class="card-header" id="forcastDate">3/31/2021</div>
+                            <div class="card-body">
+                            <h5 class="card-title" id="forecastIcon">Icon goes here</h5>
+                            <p class="card-text" id="forcastTemp">Temp: 900</p>
+                            <p class="card-text" id="forcastWind">Temp: 9 MPH</p>
+                            <p class="card-text" id="forcastHumidity">Humidity: 90%</p>
+                            </div>
+                        </div> 
+                        <div class="card text-white bg-secondary m-2 p-1 col-2" style="max-width: 14rem;">
+                            <div class="card-header" id="forcastDate">3/31/2021</div>
+                            <div class="card-body">
+                            <h5 class="card-title" id="forecastIcon">Icon goes here</h5>
+                            <p class="card-text" id="forcastTemp">Temp: 900</p>
+                            <p class="card-text" id="forcastWind">Temp: 9 MPH</p>
+                            <p class="card-text" id="forcastHumidity">Humidity: 90%</p>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+        <script src="./Assets/JS/script.js" async defer></script>
+    </body>
+</html>
